@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "827238286990",
+    "project_id": "finalproject41251",
+    "storage_bucket": "finalproject41251.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827238286990:android:7f77ad22ce16394f0a2bdf",
+        "android_client_info": {
+          "package_name": "com.example.myfinalproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCSYaeietAJ3lJe3LPWg5Jv3QD-UFGGR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827238286990:android:b1f7b9cfb60f89970a2bdf",
+        "android_client_info": {
+          "package_name": "com.example.testfeatureofqiksafe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCSYaeietAJ3lJe3LPWg5Jv3QD-UFGGR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827238286990:android:6ce9ac03879005e70a2bdf",
+        "android_client_info": {
+          "package_name": "com.panharith.chatvibol"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCSYaeietAJ3lJe3LPWg5Jv3QD-UFGGR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
