@@ -47,7 +47,17 @@
     <fragment
         android:id="@+id/helpCenterFragment"
         android:name="com.example.testfeatureofqiksafe.ui.fragment.HelpCenterFragment"
-        tools:layout="@layout/fragment_help_center" />
+        tools:layout="@layout/fragment_help_center" >
+        <action
+            android:id="@+id/action_helpCenterFragment_to_question2Fragment"
+            app:destination="@id/question2Fragment" />
+        <action
+            android:id="@+id/action_helpCenterFragment_to_question1Fragment"
+            app:destination="@id/question1Fragment" />
+        <action
+            android:id="@+id/action_helpCenterFragment_to_question3Fragment"
+            app:destination="@id/question3Fragment" />
+    </fragment>
     <fragment
         android:id="@+id/startEmergencyFragment"
         android:name="com.example.testfeatureofqiksafe.ui.fragment.StartEmergencyFragment"
@@ -69,4 +79,19 @@
         android:name="com.example.testfeatureofqiksafe.ui.fragment.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/question1Fragment"
+        android:name="com.example.testfeatureofqiksafe.ui.fragment.Question1Fragment"
+        android:label="fragment_question1"
+        tools:layout="@layout/fragment_question1" />
+    <fragment
+        android:id="@+id/question2Fragment"
+        android:name="com.example.testfeatureofqiksafe.ui.fragment.Question2Fragment"
+        android:label="fragment_question2"
+        tools:layout="@layout/fragment_question2" />
+    <fragment
+        android:id="@+id/question3Fragment"
+        android:name="com.example.testfeatureofqiksafe.ui.fragment.Question3Fragment"
+        android:label="fragment_question3"
+        tools:layout="@layout/fragment_question3" />
 </navigation>

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import com.example.testfeatureofqiksafe.R
 
@@ -16,10 +16,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HelpCenterFragment.newInstance] factory method to
+ * Use the [Question2Fragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HelpCenterFragment : Fragment() {
+class Question2Fragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -37,22 +37,15 @@ class HelpCenterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_help_center, container, false)
+        return inflater.inflate(R.layout.fragment_question2, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val q1 = view.findViewById<TextView>(R.id.clickQuestion1)
-        val q2 = view.findViewById<TextView>(R.id.clickQuestion2)
-        val q3 = view.findViewById<TextView>(R.id.clickQuestion3)
-        q1.setOnClickListener {
-            findNavController().navigate(R.id.action_helpCenterFragment_to_question1Fragment)
-        }
-        q2.setOnClickListener {
-            findNavController().navigate(R.id.action_helpCenterFragment_to_question2Fragment)
-        }
-        q3.setOnClickListener {
-            findNavController().navigate(R.id.action_helpCenterFragment_to_question3Fragment)
+
+        val backIcon = view.findViewById<ImageView>(R.id.backd)
+        backIcon.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
@@ -63,12 +56,12 @@ class HelpCenterFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment HelpCenterFragment.
+         * @return A new instance of fragment Question2Fragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            HelpCenterFragment().apply {
+            Question2Fragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
