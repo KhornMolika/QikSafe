@@ -14,11 +14,10 @@ import com.example.testfeatureofqiksafe.data.model.SelectableContact
 import com.example.testfeatureofqiksafe.data.repository.ContactRepository
 import com.example.testfeatureofqiksafe.data.repository.UserRepository
 import com.example.testfeatureofqiksafe.databinding.FragmentAddContactBinding
-import com.example.testfeatureofqiksafe.ui.adapter.AddContactAdapter
+import com.example.testfeatureofqiksafe.ui.adapter.contact.AddContactAdapter
 import com.example.testfeatureofqiksafe.ui.viewmodel.ContactViewModelFactory
 import com.example.testfeatureofqiksafe.ui.viewmodel.UserViewModel
 import com.example.testfeatureofqiksafe.ui.viewmodel.UserViewModelFactory
-import com.example.testfeatureofqiksafe.util.SharedPrefHelper
 import com.example.testfeatureofqiksafe.viewmodel.ContactViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -81,10 +80,6 @@ class AddContactFragment : Fragment() {
         contactViewModel.error.observe(viewLifecycleOwner) { err ->
             err?.let { Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show() }
         }
-        // (Optional) observe loading if you expose it and have a progress bar
-        // contactViewModel.loading.observe(viewLifecycleOwner) { isLoading ->
-        //     binding.progressBar.isVisible = isLoading
-        // }
     }
 
     private fun setupDoneButton() {
@@ -95,11 +90,16 @@ class AddContactFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val userId = SharedPrefHelper.getUserId(requireContext()) ?: ""
+            // Use Firebase Auth UID for rules compatibility
+            val uid = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid
+            if (uid == null) {
+                Toast.makeText(requireContext(), "Not signed in", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val contactToAdd = Contact(
                 contactId = selected.contactId,
-                userId = userId,
+                userId = uid,
                 name = selected.name,
                 phone = selected.phone,
                 photoUri = selected.photoUri,
@@ -108,16 +108,24 @@ class AddContactFragment : Fragment() {
                 unreadCount = 0
             )
 
-            // Add contact to Firestore
-            contactViewModel.addContact(contactToAdd)
-
-            // Also add contactId to user's emergencyContactIds list
-            userViewModel.addEmergencyContact(userId, contactToAdd.contactId)
-
-            Toast.makeText(requireContext(), "${selected.name} added.", Toast.LENGTH_SHORT).show()
-            requireActivity().onBackPressed()
+            // Atomic add-if-not-exists
+            contactViewModel.addContactIfNotDuplicate(uid, contactToAdd) { ok, duplicate, err ->
+                when {
+                    duplicate -> {
+                        Toast.makeText(requireContext(), "You already have this contact.", Toast.LENGTH_SHORT).show()
+                    }
+                    ok -> {
+                        Toast.makeText(requireContext(), "${selected.name} added.", Toast.LENGTH_SHORT).show()
+                        requireActivity().onBackPressed()
+                    }
+                    else -> {
+                        Toast.makeText(requireContext(), "Failed to add: ${err ?: "unknown error"}", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
     }
+
 
     private fun checkAndRequestContactsPermission() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_CONTACTS)

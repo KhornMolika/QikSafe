@@ -1,7 +1,6 @@
 package com.example.testfeatureofqiksafe.ui.activity
 
 import android.os.Bundle
-import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -9,6 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.example.testfeatureofqiksafe.R
 import com.example.testfeatureofqiksafe.databinding.ActivityMainBinding
 
@@ -42,39 +42,19 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.toolBar.lblTitleToolbar.text = when (destination.id) {
                 R.id.homeFragment -> "QikSafe App"
-                R.id.emergencySettingFragment -> "Setting"
+                R.id.emergencySettingFragment -> "Emergency Setting"
                 R.id.startEmergencyFragment -> "Start Emergency"
-                R.id.ContactFragment -> "Contact"
+                R.id.contactFragment -> "Emergency Contact"
                 R.id.addContactFragment -> "Add Contact"
                 R.id.recentAlertFragment -> "Recent Alert"
-                R.id.userProfileFragment -> "Profile"
+                R.id.userProfileFragment -> "User Profile"
                 R.id.helpCenterFragment -> "Help Center"
                 else -> ""
             }
         }
 
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    navController.navigate(R.id.homeFragment)
-                    true
-                }
-                R.id.nav_contact -> {
-                    navController.navigate(R.id.ContactFragment)
-                    true
-                }
-                R.id.nav_alert -> {
-                    navController.navigate(R.id.recentAlertFragment)
-                    true
-                }
-                R.id.nav_profile -> {
-                    navController.navigate(R.id.userProfileFragment)
-                    true
-                }
-                else -> false
-            }
-        }
-
+        // ✅ Let NavigationUI manage selection + navigation:
+        binding.bottomNavigation.setupWithNavController(navController)
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.bottomNavigation) { view, insets ->
             view.setPadding(

@@ -3,11 +3,8 @@ package com.example.testfeatureofqiksafe.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.testfeatureofqiksafe.data.model.User
 import com.example.testfeatureofqiksafe.data.repository.UserRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class UserViewModel(
     private val repository: UserRepository
@@ -32,9 +29,4 @@ class UserViewModel(
         }
     }
 
-    fun addEmergencyContact(userId: String, contactId: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addEmergencyContactId(userId, contactId)
-        }
-    }
 }

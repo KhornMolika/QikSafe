@@ -49,14 +49,21 @@ class ContactViewModel(
         repository.stopListening()
     }
 
-    fun addContact(contact: Contact) {
+    fun addContactIfNotDuplicate(userId: String, contact: Contact, onResult: (ok: Boolean, duplicate: Boolean, error: String?) -> Unit) {
         _loading.value = true
         viewModelScope.launch {
-            val result = repository.addContact(contact)
+            val result = repository.addContactIfNotDuplicate(userId, contact)
             _loading.postValue(false)
-            result.onFailure { e -> _error.postValue(e.message) }
+            result.onSuccess {
+                onResult(true, false, null)
+            }.onFailure { e ->
+                val dup = e is IllegalStateException && e.message == "DUPLICATE_CONTACT"
+                if (!dup) _error.postValue(e.message)
+                onResult(false, dup, e.message)
+            }
         }
     }
+
 
     fun updateContact(contactId: String, updatedData: Map<String, Any>) {
         _loading.value = true
@@ -67,12 +74,17 @@ class ContactViewModel(
         }
     }
 
-    fun deleteContact(contactId: String) {
+    fun deleteContactAndUnlink(
+        userId: String,
+        contactId: String,
+        onResult: (ok: Boolean, error: String?) -> Unit
+    ) {
         _loading.value = true
         viewModelScope.launch {
-            val result = repository.deleteContact(contactId)
+            val r = repository.deleteContactAndUnlink(userId, contactId)
             _loading.postValue(false)
-            result.onFailure { e -> _error.postValue(e.message) }
+            r.onSuccess { onResult(true, null) }
+                .onFailure { e -> _error.postValue(e.message); onResult(false, e.message) }
         }
     }
 

@@ -6,6 +6,8 @@ import android.telephony.PhoneNumberUtils
 import com.example.testfeatureofqiksafe.data.model.Contact
 import com.example.testfeatureofqiksafe.data.model.SelectableContact
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.coroutines.Dispatchers
@@ -51,9 +53,26 @@ class ContactRepository(
     /**
      * Add a new contact
      */
-    suspend fun addContact(contact: Contact): Result<Unit> {
+    suspend fun addContactIfNotDuplicate(userId: String, contact: Contact): Result<Unit> {
         return try {
-            contactsRef.add(contact).await()
+            db.runTransaction { txn ->
+                val userRef = db.collection("users").document(userId)
+                val userSnap = txn.get(userRef)
+                val existing = userSnap.get("emergencyContactIds") as? List<String> ?: emptyList()
+
+                // Already saved?
+                if (existing.contains(contact.contactId)) {
+                    throw IllegalStateException("DUPLICATE_CONTACT")
+                }
+
+                // Save contact using a stable document id = contactId
+                val contactRef = contactsRef.document(contact.contactId)
+                txn.set(contactRef, contact, SetOptions.merge())
+
+                // Add to user's list atomically
+                txn.update(userRef, "emergencyContactIds", FieldValue.arrayUnion(contact.contactId))
+            }.await()
+
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
@@ -75,11 +94,39 @@ class ContactRepository(
     /**
      * Delete a contact
      */
-    suspend fun deleteContact(contactId: String): Result<Unit> {
+
+    suspend fun debugContactDoc(contactId: String) {
+        try {
+            val doc = contactsRef.document(contactId).get().await()
+            android.util.Log.d(
+                "ContactRepo",
+                "Doc exists=${doc.exists()} id=$contactId userId=${doc.getString("userId")}"
+            )
+        } catch (e: Exception) {
+            // Catch permission errors too so the app doesn’t crash here
+            android.util.Log.e("ContactRepo", "debugContactDoc failed for $contactId", e)
+        }
+    }
+
+    suspend fun deleteContactAndUnlink(userId: String, contactId: String): Result<Unit> {
+        android.util.Log.d("Auth", "uid=${FirebaseAuth.getInstance().uid}")
         return try {
-            contactsRef.document(contactId).delete().await()
+            // IMPORTANT: no reads here
+            db.runTransaction { txn ->
+                val userRef = db.collection("users").document(userId)
+                val contactRef = contactsRef.document(contactId)
+
+                // Delete doc (rules will allow if resource.data.userId == auth.uid
+                // or your temporary missing/blank userId exception matches)
+                txn.delete(contactRef)
+
+                // Remove from user's array
+                txn.update(userRef, "emergencyContactIds", FieldValue.arrayRemove(contactId))
+            }.await()
+
             Result.success(Unit)
         } catch (e: Exception) {
+            android.util.Log.e("ContactRepo", "Delete failed for $contactId", e)
             Result.failure(e)
         }
     }
@@ -125,7 +172,5 @@ class ContactRepository(
         }
         contacts
     }
-
-
 
 }

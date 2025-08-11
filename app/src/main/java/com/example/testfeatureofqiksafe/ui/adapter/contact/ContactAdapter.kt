@@ -1,4 +1,4 @@
-package com.example.testfeatureofqiksafe.ui.adapter
+package com.example.testfeatureofqiksafe.ui.adapter.contact
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -57,8 +57,6 @@ class ContactAdapter(
 
             itemView.setOnClickListener { onContactClick(contact) }
         }
-
-
 
     }
 

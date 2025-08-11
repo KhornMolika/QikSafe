@@ -5,6 +5,7 @@ import com.example.testfeatureofqiksafe.data.model.User
 import com.example.testfeatureofqiksafe.util.SharedPrefHelper
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
+import com.google.firebase.firestore.FieldValue
 
 class UserRepository(
     private val firestore: FirebaseFirestore
@@ -51,20 +52,14 @@ class UserRepository(
             .addOnFailureListener { onComplete(false) }
     }
 
+
     /**
-     * Adds a contactId to the user's emergencyContactIds list (no duplicates).
+     * Remove a contactId of the user's emergencyContactIds list .
      */
-    suspend fun addEmergencyContactId(userId: String, contactId: String) {
+    suspend fun removeEmergencyContactId(userId: String, contactId: String) {
         val userDocRef = userDocument(userId)
-
-        firestore.runTransaction { transaction ->
-            val snapshot = transaction.get(userDocRef)
-            val existingList = snapshot.get("emergencyContactIds") as? List<String> ?: emptyList()
-
-            if (!existingList.contains(contactId)) {
-                val updatedList = existingList + contactId
-                transaction.update(userDocRef, "emergencyContactIds", updatedList)
-            }
+        firestore.runTransaction { txn ->
+            txn.update(userDocRef, "emergencyContactIds", FieldValue.arrayRemove(contactId))
         }.await()
     }
 

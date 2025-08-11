@@ -34,7 +34,7 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/primary_80"
         app:itemIconTint="@color/primary"
         app:itemTextColor="@color/primary"
         app:itemIconSize="24dp"

@@ -23,10 +23,10 @@
             app:destination="@id/userProfileFragment" />
         <action
             android:id="@+id/action_homeFragment_to_emergencyContactFragment"
-            app:destination="@id/ContactFragment" />
+            app:destination="@id/contactFragment" />
     </fragment>
     <fragment
-        android:id="@+id/ContactFragment"
+        android:id="@+id/contactFragment"
         android:name="com.example.testfeatureofqiksafe.ui.fragment.ContactFragment"
         tools:layout="@layout/fragment_contact" >
         <action

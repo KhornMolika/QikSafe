@@ -39,6 +39,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
 
         var homeFragmentLayout = FragmentHomeBinding.inflate(inflater, container, false)
+
         homeFragmentLayout.apply {
             emergencySettingBtn.setOnClickListener {
                 Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_emergencySettingFragment)
@@ -47,13 +48,16 @@ class HomeFragment : Fragment() {
                 Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_startEmergencyFragment)
             }
             emergencyContactBtn.setOnClickListener {
-                Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_emergencyContactFragment)
+                requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
+                    .selectedItemId = R.id.contactFragment
             }
             recentAlertBtn.setOnClickListener {
-                Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_recentAlertFragment)
+                requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
+                    .selectedItemId = R.id.recentAlertFragment
             }
             userProfileBtn.setOnClickListener {
-                Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_userProfileFragment)
+                requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
+                    .selectedItemId = R.id.userProfileFragment
             }
         }
 
