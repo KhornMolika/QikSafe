@@ -1,61 +1,322 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.HomeFragment"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".ui.fragment.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Home Fragment"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="20dp"/>
-
+        <!-- Top Row: Greeting Texts -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
-            <Button
-                android:id="@+id/emergencySettingBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Emergency Setting"
-                android:layout_marginBottom="40dp"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp">
 
-            <Button
-                android:id="@+id/startEmergencyBtn"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="Hey"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nicole"
+                        android:textColor="@color/primary"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="6dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/text_line2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="We are here to help"
+                    android:textColor="#303030"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Emergency Contact Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Emergency Setting Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/emergencySettingCard"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:id="@+id/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/settings_icon"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="16dp"
+                        android:contentDescription="@string/setting"
+                        android:src="@drawable/ic_setting" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="12dp"
+                        android:text="Emergency Setting"
+                        android:textColor="@color/primary"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_arrow_right_white"
+                        app:tint="@color/primary" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start Emergency"
-                android:layout_marginBottom="10dp"/>
-            <Button
-                android:id="@+id/emergencyContactBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Emergency Contact"
-                android:layout_marginBottom="10dp"/>
-            <Button
-                android:id="@+id/recentAlertBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recent Alert"
-                android:layout_marginBottom="10dp"/>
-            <Button
-                android:id="@+id/userProfileBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profile"/>
+                android:layout_marginBottom="16dp"
+                android:text="One click emergency assistance"
+                android:textColor="#888888"
+                android:textSize="12sp" />
+
+            <!-- Start Emergency Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/startEmergencyCard"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/primary"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:id="@+id/buttonNavigate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/Startemergency"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="16dp"
+                        android:contentDescription="@string/setting"
+                        android:src="@drawable/ic_emergency_share" />
+
+                    <TextView
+                        android:layout_width="256dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:paddingStart="4dp"
+                        android:text="Start Emergency "
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnArrowRight"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:padding="8dp"
+                        android:text="" />
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Contact Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/emergencyContactCard"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:id="@+id/buttonNavigate2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/secondary"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/contact"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="16dp"
+                        android:contentDescription="@string/setting"
+                        android:src="@drawable/ic_contact" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:paddingStart="4dp"
+                        android:text="Contact"
+                        android:textColor="#FFFF"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+
+                    <Button
+
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:padding="8dp"
+                        android:text="" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Recently Alert Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/recentAlertCard"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:id="@+id/buttonNavigate3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/alert"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="16dp"
+                        android:contentDescription="@string/setting"
+                        android:src="@drawable/ic_notification" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:paddingStart="4dp"
+                        android:text="Recent Alert"
+                        android:textColor="@color/primary"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <Button
+
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableEnd="@drawable/ic_arrow_right"
+                        android:padding="8dp"
+                        android:text="" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Help & Support Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/userProfileCard"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:id="@+id/buttonNavigate4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/support"
+                        android:layout_width="45dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="16dp"
+                        android:contentDescription="@string/setting"
+                        android:src="@drawable/ic_profile" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:paddingStart="4dp"
+                        android:text="Profile"
+                        android:textColor="#FFFF"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+
+                    <Button
+
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:padding="8dp"
+                        android:text="" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

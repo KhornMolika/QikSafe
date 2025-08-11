@@ -41,21 +41,21 @@ class HomeFragment : Fragment() {
         var homeFragmentLayout = FragmentHomeBinding.inflate(inflater, container, false)
 
         homeFragmentLayout.apply {
-            emergencySettingBtn.setOnClickListener {
+            emergencySettingCard.setOnClickListener {
                 Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_emergencySettingFragment)
             }
-            startEmergencyBtn.setOnClickListener {
+            startEmergencyCard.setOnClickListener {
                 Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_startEmergencyFragment)
             }
-            emergencyContactBtn.setOnClickListener {
+            emergencyContactCard.setOnClickListener {
                 requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
                     .selectedItemId = R.id.contactFragment
             }
-            recentAlertBtn.setOnClickListener {
+            recentAlertCard.setOnClickListener {
                 requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
                     .selectedItemId = R.id.recentAlertFragment
             }
-            userProfileBtn.setOnClickListener {
+            userProfileCard.setOnClickListener {
                 requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
                     .selectedItemId = R.id.userProfileFragment
             }
