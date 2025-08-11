@@ -93,4 +93,5 @@ class AuthRepository {
         auth.signOut()
         SharedPrefHelper.clearAll(context)
     }
+
 }

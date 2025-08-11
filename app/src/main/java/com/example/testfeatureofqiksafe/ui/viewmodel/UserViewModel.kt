@@ -5,27 +5,34 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.testfeatureofqiksafe.data.model.User
 import com.example.testfeatureofqiksafe.data.repository.UserRepository
+import com.google.firebase.firestore.ListenerRegistration
 
 class UserViewModel(
-    private val repository: UserRepository
+    private val repo: UserRepository
 ) : ViewModel() {
 
-    private val _userProfile = MutableLiveData<User?>()
-    val userProfile: LiveData<User?> get() = _userProfile
+    private val _user = MutableLiveData<User?>()
+    val user: LiveData<User?> get() = _user
 
-    private val _updateStatus = MutableLiveData<Boolean>()
-    val updateStatus: LiveData<Boolean> get() = _updateStatus
+    private var listenerReg: ListenerRegistration? = null
 
-    fun fetchUserProfile(context: android.content.Context) {
-        repository.fetchUserProfile(context) { user ->
-            _userProfile.postValue(user)
+    fun startListeningToUserProfile() {
+        listenerReg?.remove() // Remove old listener if already running
+        listenerReg = repo.listenToUserProfile { u ->
+            _user.postValue(u)
         }
     }
 
-    fun updateUserProfile(context: android.content.Context, updatedData: Map<String, Any>) {
-        repository.updateUserProfile(context, updatedData) { success ->
-            _updateStatus.postValue(success)
-            if (success) fetchUserProfile(context)
+    fun stopListeningToUserProfile() {
+        listenerReg?.remove()
+        listenerReg = null
+    }
+
+    fun updateUserProfile(updated: Map<String, Any>) {
+        repo.updateUserProfile(updated) { ok ->
+            if (!ok) {
+                // Optional error handling
+            }
         }
     }
 

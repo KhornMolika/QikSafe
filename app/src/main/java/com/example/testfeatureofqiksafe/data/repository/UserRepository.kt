@@ -1,66 +1,33 @@
 package com.example.testfeatureofqiksafe.data.repository
 
-import android.content.Context
 import com.example.testfeatureofqiksafe.data.model.User
-import com.example.testfeatureofqiksafe.util.SharedPrefHelper
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.tasks.await
-import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.ListenerRegistration
 
 class UserRepository(
     private val firestore: FirebaseFirestore
 ) {
 
-    private fun userDocument(userId: String) = firestore.collection("users").document(userId)
+    private fun uid(): String? = FirebaseAuth.getInstance().uid
+    private fun userDoc() = firestore.collection("users").document(uid()!!)
 
-    fun fetchUserProfile(context: Context, onComplete: (User?) -> Unit) {
-        val userId = SharedPrefHelper.getUserId(context)
-        if (userId.isNullOrEmpty()) {
-            onComplete(null)
-            return
+    fun listenToUserProfile(onChange: (User?) -> Unit): ListenerRegistration? {
+        val u = uid() ?: return null
+        return userDoc().addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                onChange(null)
+                return@addSnapshotListener
+            }
+            onChange(snapshot?.toObject(User::class.java))
         }
-
-        FirebaseFirestore.getInstance()
-            .collection("users")
-            .document(userId)
-            .get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    val profile = document.toObject(User::class.java)
-                    onComplete(profile)
-                } else {
-                    onComplete(null)
-                }
-            }
-            .addOnFailureListener {
-                onComplete(null)
-            }
     }
 
-    fun updateUserProfile(context: Context, updatedData: Map<String, Any>, onComplete: (Boolean) -> Unit) {
-        val userId = SharedPrefHelper.getUserId(context)
-        if (userId.isNullOrEmpty()) {
-            onComplete(false)
-            return
-        }
-
-        FirebaseFirestore.getInstance()
-            .collection("users")
-            .document(userId)
-            .update(updatedData)
+    fun updateUserProfile(updatedData: Map<String, Any>, onComplete: (Boolean) -> Unit) {
+        val u = uid() ?: return onComplete(false)
+        userDoc().update(updatedData)
             .addOnSuccessListener { onComplete(true) }
             .addOnFailureListener { onComplete(false) }
-    }
-
-
-    /**
-     * Remove a contactId of the user's emergencyContactIds list .
-     */
-    suspend fun removeEmergencyContactId(userId: String, contactId: String) {
-        val userDocRef = userDocument(userId)
-        firestore.runTransaction { txn ->
-            txn.update(userDocRef, "emergencyContactIds", FieldValue.arrayRemove(contactId))
-        }.await()
     }
 
 }

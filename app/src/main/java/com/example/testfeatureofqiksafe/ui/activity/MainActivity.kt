@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.addContactFragment -> "Add Contact"
                 R.id.recentAlertFragment -> "Recent Alert"
                 R.id.userProfileFragment -> "User Profile"
+                R.id.editProfileFragment -> "Edit Profile"
                 R.id.helpCenterFragment -> "Help Center"
                 R.id.question1Fragment -> "FAQ"
                 R.id.question2Fragment -> "FAQ"

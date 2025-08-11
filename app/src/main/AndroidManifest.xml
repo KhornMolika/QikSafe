@@ -5,6 +5,10 @@
     <!-- Only request permissions you actually need -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -16,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestFeatureOfQikSafe"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.activity.ChatActivity"
+            android:exported="false" />
         <!-- Launcher Activity with splash theme -->
         <activity
             android:name=".ui.activity.SplashActivity"
@@ -24,23 +30,19 @@
             android:theme="@style/Theme.QikSafe.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Main app activities -->
+        </activity> <!-- Main app activities -->
         <activity
             android:name=".ui.activity.MainActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.activity.EmailVerificationActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.activity.LoginActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.activity.RegisterActivity"
             android:exported="false" />

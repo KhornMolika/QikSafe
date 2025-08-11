@@ -11,4 +11,5 @@
     <string name="profile">Profile</string>
     <string name="done">Done</string>
     <string name="setting">Setting</string>
+    <string name="default_user_name">Guest User</string>
 </resources>

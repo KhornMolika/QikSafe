@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.testfeatureofqiksafe.data.repository.AuthRepository
+import com.google.firebase.auth.FirebaseAuth
 
 class AuthViewModel : ViewModel() {
 
@@ -31,4 +32,12 @@ class AuthViewModel : ViewModel() {
     fun logout(context: Context) {
         repository.logout(context)
     }
+
+    fun sendPasswordReset(email: String, onResult: (Boolean, String?) -> Unit) {
+        FirebaseAuth.getInstance()
+            .sendPasswordResetEmail(email)
+            .addOnSuccessListener { onResult(true, null) }
+            .addOnFailureListener { e -> onResult(false, e.message) }
+    }
+
 }

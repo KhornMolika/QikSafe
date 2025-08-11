@@ -11,7 +11,7 @@
 
     <!-- ✅ Main App Theme -->
     <style name="Base.Theme.TestFeatureOfQikSafe" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlNormal">@color/primary</item>
         <item name="colorPrimary">@color/primary</item>
     </style>
 

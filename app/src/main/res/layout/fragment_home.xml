@@ -39,7 +39,7 @@
                         android:textSize="18sp"/>
 
                     <TextView
-                        android:id="@+id/tvName"
+                        android:id="@+id/tvUserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nicole"
@@ -56,6 +56,7 @@
                     android:text="We are here to help"
                     android:textColor="#303030"
                     android:textSize="18sp"
+                    android:layout_marginTop="4dp"
                     android:textStyle="normal" />
             </LinearLayout>
 
@@ -65,14 +66,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
 
             <!-- Emergency Setting Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/emergencySettingCard"
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="30dp"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
@@ -87,8 +90,8 @@
 
                     <ImageView
                         android:id="@+id/settings_icon"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginStart="16dp"
                         android:contentDescription="@string/setting"
                         android:src="@drawable/ic_setting" />
@@ -100,13 +103,13 @@
                         android:paddingStart="12dp"
                         android:text="Emergency Setting"
                         android:textColor="@color/primary"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_arrow_right_white"
+                        android:src="@drawable/ic_arrow_right"
                         app:tint="@color/primary" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -124,8 +127,8 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/startEmergencyCard"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="20dp"
                 app:cardBackgroundColor="@color/primary"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
@@ -140,8 +143,8 @@
 
                     <ImageView
                         android:id="@+id/Startemergency"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginStart="16dp"
                         android:contentDescription="@string/setting"
                         android:src="@drawable/ic_emergency_share" />
@@ -154,7 +157,7 @@
                         android:paddingStart="4dp"
                         android:text="Start Emergency "
                         android:textColor="@color/white"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <Button
@@ -165,17 +168,16 @@
                         android:drawableEnd="@drawable/ic_arrow_right_white"
                         android:padding="8dp"
                         android:text="" />
-
-
                 </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
             <!-- Contact Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/emergencyContactCard"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="20dp"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
@@ -191,21 +193,21 @@
 
                     <ImageView
                         android:id="@+id/contact"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginStart="16dp"
                         android:contentDescription="@string/setting"
                         android:src="@drawable/ic_contact" />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:paddingStart="4dp"
                         android:text="Contact"
                         android:textColor="#FFFF"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
 
@@ -224,8 +226,8 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/recentAlertCard"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="20dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
@@ -240,8 +242,8 @@
 
                     <ImageView
                         android:id="@+id/alert"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginStart="16dp"
                         android:contentDescription="@string/setting"
                         android:src="@drawable/ic_notification" />
@@ -254,25 +256,26 @@
                         android:paddingStart="4dp"
                         android:text="Recent Alert"
                         android:textColor="@color/primary"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <Button
-
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:background="?attr/selectableItemBackground"
                         android:drawableEnd="@drawable/ic_arrow_right"
                         android:padding="8dp"
                         android:text="" />
+
                 </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
             <!-- Help & Support Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/userProfileCard"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="70dp"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="16dp"
@@ -289,8 +292,8 @@
 
                     <ImageView
                         android:id="@+id/support"
-                        android:layout_width="45dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginStart="16dp"
                         android:contentDescription="@string/setting"
                         android:src="@drawable/ic_profile" />
@@ -303,7 +306,7 @@
                         android:paddingStart="4dp"
                         android:text="Profile"
                         android:textColor="#FFFF"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
 
