@@ -1,18 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F0F3F6"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.fragment.RecentAlertFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Recent Alert Fragment"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        android:gravity="center"/>
+    <!-- Tab buttons -->
+    <LinearLayout
+        android:id="@+id/tabsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:background="@color/primary_80"
+        android:clipToOutline="true"
+        android:weightSum="2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-</FrameLayout>
+        <TextView
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/tabUserAlert"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/primary"
+            android:gravity="center"
+            android:text="Your Alert"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:padding="8dp"
+            android:layout_marginEnd="4dp"/>
+
+        <TextView
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/tabContactAlert"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Contact Alert"
+            android:textColor="@color/secondary"
+            android:textSize="14sp"
+            android:padding="8dp"/>
+
+    </LinearLayout>
+
+    <!-- Label Today -->
+
+    <TextView
+        android:id="@+id/todayLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Today"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/secondary"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tabsLayout"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- RecyclerView for alert items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/alertRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/todayLabel"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
