@@ -56,9 +56,11 @@
                             android:textColor="#1B1B1B" />
 
                         <com.google.android.material.materialswitch.MaterialSwitch
-                            android:id="@+id/background_access_switch"
+                            android:id="@+id/backgroundAccessSwitch"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:trackTint="#FFCDD2"
+                            android:thumbTint="@color/primary"/>
                     </LinearLayout>
 
                     <TextView
@@ -99,7 +101,7 @@
                     android:padding="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/emergency_number_edit_text"
+                        android:id="@+id/emergencyNumberEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="phone" />

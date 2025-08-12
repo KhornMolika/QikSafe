@@ -21,18 +21,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // ✅ Initialize ViewBinding
+        //  Initialize ViewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // ✅ Apply window insets for edge-to-edge layout
+        //  Apply window insets for edge-to-edge layout
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // ✅ Navigation
+        //  Navigation
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHost) as NavHostFragment?
         val navController = navHostFragment?.navController
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment -> "QikSafe App"
                 R.id.emergencySettingFragment -> "Emergency Setting"
                 R.id.startEmergencyFragment -> "Start Emergency"
-                R.id.contactFragment -> "Emergency Contact"
+                R.id.contactFragment -> "Contact"
                 R.id.addContactFragment -> "Add Contact"
                 R.id.recentAlertFragment -> "Recent Alert"
                 R.id.userProfileFragment -> "User Profile"
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // ✅ Let NavigationUI manage selection + navigation:
+        //  Let NavigationUI manage selection + navigation:
         binding.bottomNavigation.setupWithNavController(navController)
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.bottomNavigation) { view, insets ->

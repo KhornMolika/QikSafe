@@ -48,40 +48,40 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- GPS Switch Row -->
-    <LinearLayout
-        android:id="@+id/gps_row"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@id/tvUserName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/gps_row"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tvUserName"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent">-->
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_sent" />
+<!--        <ImageView-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/ic_sent" />-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="12dp"
-            android:text="Automatic GPS Sharing"
-            android:textColor="#333"
-            android:textSize="16sp" />
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_marginStart="12dp"-->
+<!--            android:text="Automatic GPS Sharing"-->
+<!--            android:textColor="#333"-->
+<!--            android:textSize="16sp" />-->
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/switch_gps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:thumbTint="@color/primary"
-            android:background="@drawable/border_black"
-            android:trackTint="#FFCDD2" />
+<!--        <com.google.android.material.materialswitch.MaterialSwitch-->
+<!--            android:id="@+id/switch_gps"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:thumbTint="@color/primary"-->
+<!--            android:background="@drawable/border_black"-->
+<!--            android:trackTint="#FFCDD2" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     <!-- Menu Items -->
     <LinearLayout
@@ -90,12 +90,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="36dp"
-        app:layout_constraintTop_toBottomOf="@id/gps_row"
+        app:layout_constraintTop_toBottomOf="@id/tvUserName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Message -->
         <LinearLayout
+            android:id="@+id/btnContact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

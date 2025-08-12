@@ -9,6 +9,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <!-- Only if you truly need updates while in background -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -20,9 +23,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestFeatureOfQikSafe"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.activity.ChatActivity"
-            android:exported="false" />
         <!-- Launcher Activity with splash theme -->
         <activity
             android:name=".ui.activity.SplashActivity"
@@ -45,6 +45,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.ChatActivity"
             android:exported="false" />
     </application>
 
