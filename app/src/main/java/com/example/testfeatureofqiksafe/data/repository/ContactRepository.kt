@@ -20,6 +20,14 @@ class ContactRepository(
     private val contactsRef = db.collection("contacts")
     private var snapshotListener: ListenerRegistration? = null
 
+    suspend fun getContactsForUser(userId: String): List<Contact> {
+        val snap = db.collection("contacts")
+            .whereEqualTo("userId", userId)
+            .get()
+            .await()
+        return snap.toObjects(Contact::class.java)
+    }
+
     /**
      * Listen to real-time updates for contacts
      */
@@ -116,8 +124,6 @@ class ContactRepository(
                 val userRef = db.collection("users").document(userId)
                 val contactRef = contactsRef.document(contactId)
 
-                // Delete doc (rules will allow if resource.data.userId == auth.uid
-                // or your temporary missing/blank userId exception matches)
                 txn.delete(contactRef)
 
                 // Remove from user's array

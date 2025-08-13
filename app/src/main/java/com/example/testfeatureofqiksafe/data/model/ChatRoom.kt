@@ -3,7 +3,8 @@ import com.google.firebase.Timestamp
 
 data class ChatRoom(
     val chatId: String = "",
-    val participants: List<String> = listOf(), // user IDs
-    val lastMessage: String = "",
-    val lastUpdated: Timestamp = Timestamp.now()
+    val participants: List<String> = emptyList(), // [uidA, uidB] or more for group
+    val createdAt: Timestamp = Timestamp.now(),
+    val lastMessagePreview: String = "",
+    val lastMessageAt: Timestamp? = null
 )

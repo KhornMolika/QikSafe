@@ -103,7 +103,7 @@
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="5dp"
             android:backgroundTint="@color/primary"
             android:elevation="4dp"
             android:text="Save"

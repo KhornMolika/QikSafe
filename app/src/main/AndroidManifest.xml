@@ -12,6 +12,13 @@
     <!-- Only if you truly need updates while in background -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
+    <!-- Optional (for direct call) -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -49,6 +56,11 @@
         <activity
             android:name=".ui.activity.ChatActivity"
             android:exported="false" />
+
+        <service
+            android:name=".domain.LiveLocationService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
     </application>
 
 </manifest>
